@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>N-Body Simulator</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="side-icons">
+    <div class="icon">
+      <i class="material-icons" onclick="openNav('ScenarioSidebar')">bubble_chart</i>
+      <span class="tooltip-text">Scenarios</span>
+      <div id="ScenarioSidebar" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav('ScenarioSidebar')">&times;</a>
+        <a href="javascript:void(0)" onclick="ScenarioEarthMoon()">Earth-Moon System</a>
+        <a href="javascript:void(0)" onclick="ScenarioSolarSystem()">Solar System</a>
+        <a href="javascript:void(0)" onclick="ThreeBody_1()">Three Body 1</a>
+        <a href="javascript:void(0)" onclick="CreateRandomScenario()">Random System</a>
+      </div>
+    </div>
+    <div class="icon">
+      <i class="material-icons" onclick="openNav('BodySidebar')">add_circle</i>
+      <span class="tooltip-text">Add Body</span>
+      <div id="BodySidebar" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav('BodySidebar')">&times;</a>
+        <div class="position">
+          <span>Body Position</span>
+          <span>
+            <input type="range" min="-250" max="250" value="0" step="5" id="_x" onmousemove="updatePos()">
+          </span>
+          <span>
+            <input type="range" min="-250" max="250" value="0" step="5" id="_y" onmousemove="updatePos()">
+          </span>
+          <span>
+            <input type="range" min="-250" max="250" value="0" step="5" id="_z" onmousemove="updatePos()">
+          </span>
+          <span id="output_position">pos: [0, 0, 0] m</span>
+        </div>
+        <hr style="width:85%;text-align:left;margin-left:4">
+        <div class="velocity">
+          <span>Body Velocity</span>
+          <span>
+            <input type="range" min="-100" max="100" value="0" step="5" id="_vx" onmousemove="updateVel()">
+          </span>
+          <span>
+            <input type="range" min="-100" max="100" value="0" step="5" id="_vy" onmousemove="updateVel()">
+          </span>
+          <span>
+            <input type="range" min="-100" max="100" value="0" step="5" id="_vz" onmousemove="updateVel()">
+          </span>
+          <span id="output_velocity">vel: [0, 0, 0] 1e-6 m/s</span>
+        </div>
+        <hr style="width:85%;text-align:left;margin-left:4">
+        <div class="mass">
+          <span>Body Mass</span>
+          <span>
+            <input type="range" min="1" max="10000" value="1" step="1" id="_m" onmousemove="updateMass()">
+          </span>
+          <span id="output_mass">mass: 1 kg</span>
+        </div>
+        <hr style="width:85%;text-align:left;margin-left:4">
+        <div class="radius">
+          <span>Body Radius</span>
+          <span>
+            <input type="range" min="1" max="10" value="1" step="1" id="_r" onmousemove="updateRadius()">
+          </span>
+          <span id="output_radius">radius: 1 m</span>
+        </div>
+        <hr style="width:85%;text-align:left;margin-left:4">
+        <div>
+          <span>
+            <button class="btn" onclick="newBody()">Create Body</button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="icon">
+      <i class="material-icons" onclick="scenario.CreateBody(null, null, null, null, null)">help</i>
+      <span class="tooltip-text">Add Random Body</span>
+    </div>
+    <div class="icon">
+      <i class="material-icons" onclick="openNav('SettingSidebar')">settings</i>
+      <span class="tooltip-text">Settings</span>
+      <div id="SettingSidebar" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav('SettingSidebar')">&times;</a>
+        <a href="javascript:void(0)">JoinBodies option</a>
+        <a href="javascript:void(0)">Background???</a>
+        <a href="javascript:void(0)">Trajectories</a>
+        <a href="javascript:void(0)">GravityConstant</a>
+      </div>
+    </div>
+    <div class="icon">
+      <i class="material-icons" onclick="scenario.ClearScenario()">delete</i>
+      <span class="tooltip-text">Delete Scenario</span>
+    </div>
+  </div>
+  <div class="side-bar">
+    <div class="icon">
+      <i class="material-icons" onclick="SlowDownSimulation()">fast_rewind</i>
+    </div>
+    <div class="icon">
+      <i class="material-icons" onclick="StopSimulation()">pause</i>
+    </div>
+    <div class="icon">
+      <i class="material-icons" onclick="ResumeSimulation()">play_arrow</i>
+    </div>
+    <div class="icon">
+      <i class="material-icons" onclick="SpeedUpSimulation()">fast_forward</i>
+    </div>
+  </div>
+  <script>
+    function openNav(id) {
+      document.getElementById(id).style.width = "300px";
+    }
+
+    function closeNav(id) {
+      document.getElementById(id).style.width = "0";
+    }
+
+    function newBody() {
+      var _pos = [];
+      var _vel = [];
+
+      _pos.push(parseFloat(document.getElementById('_x').value));
+      _pos.push(parseFloat(document.getElementById('_y').value));
+      _pos.push(parseFloat(document.getElementById('_z').value));
+      _vel.push(parseFloat(document.getElementById('_vx').value * 1e-6));
+      _vel.push(parseFloat(document.getElementById('_vy').value * 1e-6));
+      _vel.push(parseFloat(document.getElementById('_vz').value * 1e-6));
+
+      var _mass = parseFloat(document.getElementById('_m').value);
+      var _radius = parseFloat(document.getElementById('_r').value);
+
+      scenario.CreateBody(_pos, _vel, _radius, _mass, null);
+    }
+
+    function updatePos() {
+
+      var _pos_x_str = document.getElementById('_x').value;
+      var _pos_y_str = document.getElementById('_y').value;
+      var _pos_z_str = document.getElementById('_z').value;
+
+      document.getElementById("output_position").innerHTML = "pos: [" + _pos_x_str + ", " + _pos_y_str + ", " + _pos_z_str + "] m";
+    }
+
+    function updateVel() {
+
+      var _vel_x_str = document.getElementById('_vx').value;
+      var _vel_y_str = document.getElementById('_vy').value;
+      var _vel_z_str = document.getElementById('_vz').value;
+
+      document.getElementById("output_velocity").innerHTML = "vel: [" + _vel_x_str + ", " + _vel_y_str + ", " + _vel_z_str + "] 1e-6 m/s";
+    }
+
+    function updateMass() {
+
+      var _mass_str = document.getElementById('_m').value;
+
+      document.getElementById("output_mass").innerHTML = "mass: " + _mass_str + " kg";
+    }
+
+
+    function updateRadius() {
+
+      var _radius_str = document.getElementById('_r').value;
+
+      document.getElementById("output_radius").innerHTML = "radius: " + _radius_str + " m";
+    }
+  </script>
+  <script src="js/three.js"></script>
+  <script src="js/OrbitControls.js"></script>
+  <script type="text/javascript" src="maths_utils.js"></script>
+  <script type="text/javascript" src="integration.js"></script>
+  <script type="text/javascript" src="animations.js"></script>
+  <script type="text/javascript" src="physics.js"></script>
+  <script type="text/javascript" src="commands.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+</body>
+</html>

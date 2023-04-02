@@ -22,7 +22,7 @@ function Scenario() {
   this.bodies = [];
 
   // method used to instantiate a single body
-  this.CreateBody = function(pos, vel, radius, mass, rgb_color, pos_range=100) {
+  this.CreateBody = function(pos, vel, radius, mass, rgb_color) {
 
     // if position not defined -> set random position between +- pos_range
     if (!pos) {
@@ -35,13 +35,11 @@ function Scenario() {
     // if velocity not defined -> set random velocity to 0
     if (!vel) {
 
-      vel = [0, 0, 0];
-      /*
+      // vel = [0, 0, 0];
       vel = [];
       for (var i = 0; i < 3; i++) {
-        vel.push(getRandomInt(-1, 1) * 0.000002);
+        vel.push(getRandomInt(-1, 1) * 0.00001);
       }
-      */
     }
 
     // if radius not defined -> set random radius
