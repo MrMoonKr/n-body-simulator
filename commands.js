@@ -20,6 +20,11 @@ function SpeedUpSimulation() {
   h += _h_step;
 }
 
+
+function SetSimulationStep(sim_step) {
+  h = sim_step;
+}
+
 // simulation scenarios creation functions
 function CreateRandomScenario() {
   scenario.ClearScenario();

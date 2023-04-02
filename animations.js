@@ -10,7 +10,7 @@ const aspect = window.innerWidth / window.innerHeight;
 const near = 0.01;
 const far = 2000;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-camera.position.z = 50;
+camera.position.z = -250;
 
 // create scene
 const scene = new THREE.Scene();

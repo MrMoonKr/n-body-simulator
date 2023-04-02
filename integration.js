@@ -3,8 +3,6 @@ function ComputeAcceleration(first_body, bodies) {
 
   // define colliding bodies array
   var colliding_bodies = [];
-  // define gravity constant G
-  var gravity_const = 6.674e-11;
   // reset first_body acceleration
   var acc = [0, 0, 0];
   // update first_body acceleration taking into account the contribution of all the bodies

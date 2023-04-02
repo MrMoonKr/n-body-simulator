@@ -32,11 +32,14 @@ input[type=number] {
   position: absolute;
   right: 0;
   bottom: 0;
-
 }
 
 .side-bar .icon {
     float: left;
+}
+
+.side-bar .slider input[type=range] {
+  width: 85%;
 }
 
 .side-icons .btn {
@@ -127,7 +130,7 @@ input[type=number] {
 .sidenav .closebtn {
   position: absolute;
   top: 0;
-  right: 25px;
+  right: 10px;
   font-size: 36px;
   margin-left: 50px;
 }

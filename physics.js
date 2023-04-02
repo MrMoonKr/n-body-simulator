@@ -49,7 +49,7 @@ function Scenario() {
 
     // if mass not defined -> set random mass
     if (!mass) {
-      mass = getRandomInt(1, 10);
+      mass = getRandomInt(1, 50);
     }
 
     // compute density

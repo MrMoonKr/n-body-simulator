@@ -83,6 +83,14 @@
       <span class="tooltip-text">Settings</span>
       <div id="SettingSidebar" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav('SettingSidebar')">&times;</a>
+        <div>
+          <span>Simulation Step</span>
+          <span>
+            <input type="range" min="0" max="50000" value="5000" step="1000" id="_sim_step" onmousemove="updateSimulationStep()">
+          </span>
+          <span id="output_step">step: 5000 s</span>
+        </div>
+        <hr style="width:85%;text-align:left;margin-left:4">
         <a href="javascript:void(0)">JoinBodies option</a>
         <a href="javascript:void(0)">Background???</a>
         <a href="javascript:void(0)">Trajectories</a>
@@ -94,7 +102,10 @@
       <span class="tooltip-text">Delete Scenario</span>
     </div>
   </div>
-  <div class="side-bar">
+  <!-- <div class="side-bar">
+    <div class="slider">
+      <input type="range" min="0" max="100000" value="0" step="5000" id="_timestep" onmousemove="updateSimulationStep()">
+    </div>
     <div class="icon">
       <i class="material-icons" onclick="SlowDownSimulation()">fast_rewind</i>
     </div>
@@ -107,7 +118,7 @@
     <div class="icon">
       <i class="material-icons" onclick="SpeedUpSimulation()">fast_forward</i>
     </div>
-  </div>
+  </div> -->
   <script>
     function openNav(id) {
       document.getElementById(id).style.width = "300px";
@@ -166,6 +177,15 @@
 
       document.getElementById("output_radius").innerHTML = "radius: " + _radius_str + " m";
     }
+
+    function updateSimulationStep() {
+
+      var _sim_step = document.getElementById('_sim_step').value;
+      document.getElementById("output_step").innerHTML = "step: " + _sim_step + " s";
+
+      SetSimulationStep(_sim_step)
+    }
+
   </script>
   <script src="js/three.js"></script>
   <script src="js/OrbitControls.js"></script>
