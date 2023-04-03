@@ -12,10 +12,18 @@
       <span class="tooltip-text">Scenarios</span>
       <div id="ScenarioSidebar" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav('ScenarioSidebar')">&times;</a>
-        <a href="javascript:void(0)" onclick="ScenarioEarthMoon()">Earth-Moon System</a>
-        <a href="javascript:void(0)" onclick="ScenarioSolarSystem()">Solar System</a>
-        <a href="javascript:void(0)" onclick="ThreeBody_1()">Three Body 1</a>
+        <span>TWO-BODY SYSTEMS</span>
+        <a href="javascript:void(0)" onclick="TwoBodyCircle1()">1-Circular Trajectory</a>
+        <a href="javascript:void(0)" onclick="TwoBodyCircle2()">2-Circular Trajectories</a>
+        <a href="javascript:void(0)" onclick="TwoBodyElliptic1()">1-Elliptical Trajectory</a>
+        <a href="javascript:void(0)" onclick="TwoBodyElliptic2()">2-Elliptical Trajectories</a>
+        <hr style="width:85%;text-align:left;margin-left:4">
+        <span>THREE-BODY SYSTEMS</span>
+        <a href="javascript:void(0)" onclick="ThreeBody1()">Three Body 1</a>
+        <hr style="width:85%;text-align:left;margin-left:4">
+        <span>N-BODY SYSTEMS</span>
         <a href="javascript:void(0)" onclick="CreateRandomScenario()">Random System</a>
+        <hr style="width:85%;text-align:left;margin-left:4">
       </div>
     </div>
     <div class="icon">
@@ -91,10 +99,17 @@
           <span id="output_step">step: 5000 s</span>
         </div>
         <hr style="width:85%;text-align:left;margin-left:4">
-        <a href="javascript:void(0)">JoinBodies option</a>
+        <div>
+          <span>Gravitational Constant</span>
+          <span>
+            <input type="range" min="0.1" max="10" value="1" step="0.1" id="_grav_const" onmousemove="updateGravityConst()">
+          </span>
+          <span id="output_grav">gravitational constant: 1 G</span>
+        </div>
+        <hr style="width:85%;text-align:left;margin-left:4">
+        <!-- <a href="javascript:void(0)">JoinBodies option</a>
         <a href="javascript:void(0)">Background???</a>
-        <a href="javascript:void(0)">Trajectories</a>
-        <a href="javascript:void(0)">GravityConstant</a>
+        <a href="javascript:void(0)">Trajectories</a> -->
       </div>
     </div>
     <div class="icon">
@@ -102,23 +117,6 @@
       <span class="tooltip-text">Delete Scenario</span>
     </div>
   </div>
-  <!-- <div class="side-bar">
-    <div class="slider">
-      <input type="range" min="0" max="100000" value="0" step="5000" id="_timestep" onmousemove="updateSimulationStep()">
-    </div>
-    <div class="icon">
-      <i class="material-icons" onclick="SlowDownSimulation()">fast_rewind</i>
-    </div>
-    <div class="icon">
-      <i class="material-icons" onclick="StopSimulation()">pause</i>
-    </div>
-    <div class="icon">
-      <i class="material-icons" onclick="ResumeSimulation()">play_arrow</i>
-    </div>
-    <div class="icon">
-      <i class="material-icons" onclick="SpeedUpSimulation()">fast_forward</i>
-    </div>
-  </div> -->
   <script>
     function openNav(id) {
       document.getElementById(id).style.width = "300px";
@@ -183,14 +181,22 @@
       var _sim_step = document.getElementById('_sim_step').value;
       document.getElementById("output_step").innerHTML = "step: " + _sim_step + " s";
 
-      SetSimulationStep(_sim_step)
+      SetSimulationStep(_sim_step);
     }
+
+    function updateGravityConst() {
+
+      var _const = document.getElementById('_grav_const').value;
+      document.getElementById("output_grav").innerHTML = "gravitational constant: " + _const + " G";
+
+      SetGravityConst(_const);
+    }
+
 
   </script>
   <script src="js/three.js"></script>
   <script src="js/OrbitControls.js"></script>
   <script type="text/javascript" src="maths_utils.js"></script>
-  <script type="text/javascript" src="integration.js"></script>
   <script type="text/javascript" src="animations.js"></script>
   <script type="text/javascript" src="physics.js"></script>
   <script type="text/javascript" src="commands.js"></script>

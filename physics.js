@@ -1,5 +1,3 @@
-// define the maximum points drawn for each trajectory
-var MAX_POINTS = 1000; // link it to simulation_step "h"
 
 // body object
 function Body(pos, vel, mass, radius, density, mesh, rgb_color, trace_array, trajectory, drawCount) {
@@ -15,7 +13,7 @@ function Body(pos, vel, mass, radius, density, mesh, rgb_color, trace_array, tra
   this.drawCount = drawCount;
 }
 
-//
+// scenario object
 function Scenario() {
 
   // container used to store the Body objects
@@ -82,7 +80,7 @@ function Scenario() {
     traj_material.flatShading = true;
     // set trajectory geometry
     var traj_geometry = new THREE.BufferGeometry();
-    var trace_array = new Array(MAX_POINTS * 3).fill(0);
+    var trace_array = new Array(max_points * 3).fill(0);
     traj_geometry.setAttribute("position", new THREE.Float32BufferAttribute(trace_array, 3));
     var drawCount = 0;
     var trajectory = new THREE.Line(traj_geometry, traj_material);
@@ -121,10 +119,10 @@ function Scenario() {
   this.UpdateTrajectories = function() {
     for (var body of this.bodies) {
       body.trace_array.unshift(body.pos[0], body.pos[1], body.pos[2]);
-      body.trace_array.splice(MAX_POINTS * 3);
+      body.trace_array.splice(max_points * 3);
       body.trajectory.attributes.position.copyArray(body.trace_array);
       body.trajectory.attributes.position.needsUpdate = true;
-      body.drawCount = THREE.MathUtils.clamp(body.drawCount, 0, MAX_POINTS);
+      body.drawCount = THREE.MathUtils.clamp(body.drawCount, 0, max_points);
       body.trajectory.setDrawRange(0, body.drawCount);
       body.drawCount ++;
     }
@@ -215,4 +213,85 @@ function cleanbodies(colliding_bodies) {
     }
   }
   return colliding_bodies;
+}
+
+
+
+// compute the acceleration felt by single body caused by the presence of the other bodies
+function ComputeAcceleration(first_body, bodies) {
+
+  // define colliding bodies array
+  var colliding_bodies = [];
+
+  // reset first_body acceleration
+  var acc = [0, 0, 0];
+
+  // update first_body acceleration taking into account the contribution of all the bodies
+  for (var second_body of bodies) {
+    if (first_body != second_body) {
+
+      // compute distance and distance norm
+      var result = ComputeDistance(first_body.pos, second_body.pos);
+
+      // get distance_norm ^ 3
+      var distance_norm_3 = Math.pow(result.distance_norm, 3);
+
+      // update first_body acceleration
+      if (result.distance_norm > Math.max(first_body.radius, second_body.radius)) {
+        for (var i = 0; i < 3; i ++) {
+          acc[i] += - result.distance[i] / distance_norm_3 * second_body.mass * gravity_const;
+        }
+      }
+      else {
+        acc = [0, 0, 0];
+        colliding_bodies = [first_body, second_body];
+      }
+    }
+  }
+  return {acc, colliding_bodies};
+}
+
+
+// runge kutta integration of order 4
+function RungeKutta(body, bodies) { // REMOVE h
+
+  var pos_1 = body.pos;
+  var vel_1 = body.vel;
+  var res_1 = ComputeAcceleration(body, bodies);
+
+  var pos_2 = v_sum(pos_1, v_x_const(vel_1, (0.5 * h)));
+  var vel_2 = v_sum(vel_1, v_x_const(res_1.acc, (0.5 * h)));
+  body.pos = pos_2;
+  body.vel = vel_2;
+  var res_2 = ComputeAcceleration(body, bodies);
+
+
+  var pos_3 = v_sum(pos_1, v_x_const(vel_2, (0.5 * h)));
+  var vel_3 = v_sum(vel_1, v_x_const(res_2.acc, (0.5 * h)));
+  body.pos = pos_3;
+  body.vel = vel_3;
+  var res_3 = ComputeAcceleration(body, bodies);
+
+
+  var pos_4 = v_sum(pos_1, v_x_const(vel_3, h));
+  var vel_4 = v_sum(vel_1, v_x_const(res_3.acc, h));
+  body.pos = pos_4;
+  body.vel = vel_4;
+  var res_4 = ComputeAcceleration(body, bodies);
+
+
+  var pos_f = v_sum(pos_1, v_x_const(v_sum(v_sum(vel_1, v_x_const(vel_2, 2)), v_sum(v_x_const(vel_3, 2), vel_4)), h / 6));
+  var vel_f = v_sum(vel_1, v_x_const(v_sum(v_sum(res_1.acc, v_x_const(res_2.acc, 2)), v_sum(v_x_const(res_3.acc, 2), res_4.acc)), h / 6));
+
+  body.pos = pos_f;
+  body.vel = vel_f;
+
+  // call colliding bodies
+  var colliding_bodies = [res_1.colliding_bodies, res_2.colliding_bodies, res_3.colliding_bodies, res_4.colliding_bodies];
+  for (var bodies of colliding_bodies) {
+    if (bodies.length > 0) {
+      return bodies;
+    }
+  }
+  return [];
 }
