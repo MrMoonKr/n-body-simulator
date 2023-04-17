@@ -30,3 +30,22 @@ controls.dampingFactor = 0.05;
 //  light.position.set(-1, 2, 4);
   scene.add(light);
 }
+
+var speed = 0.1;
+
+function onDocumentKeyDown(event) {
+  var keyCode = event.which;
+  if (keyCode == 65) { // Left arrow key
+      camera.rotation.y += speed;
+  } else if (keyCode == 87) { // Up arrow key
+      camera.rotation.x -= speed;
+  } else if (keyCode == 68) { // Right arrow key
+      camera.rotation.y -= speed;
+  } else if (keyCode == 83) { // Down arrow key
+      camera.rotation.x += speed;
+  }
+}
+
+document.addEventListener("keydown", onDocumentKeyDown, false);
+
+
