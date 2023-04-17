@@ -560,25 +560,59 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		switch ( event.keyCode ) {
 
+			case 97:
+				dollyIn( getZoomScale() )
+				break;
+
+			case 98:
+				dollyOut( getZoomScale() )
+				break;
+
 			case scope.keys.UP:
-				pan( 0, scope.keyPanSpeed );
+				rotateUp(2 * Math.PI / 60 / 60 * 5);
+				// pan( 0, scope.keyPanSpeed );
 				needsUpdate = true;
 				break;
 
 			case scope.keys.BOTTOM:
-				pan( 0, - scope.keyPanSpeed );
+				
+				rotateUp(-2 * Math.PI / 60 / 60 * 5);
+				// pan( 0, - scope.keyPanSpeed );
 				needsUpdate = true;
 				break;
 
 			case scope.keys.LEFT:
-				pan( scope.keyPanSpeed, 0 );
+				rotateLeft(2 * Math.PI / 60 / 60 * 5);
+				// pan( scope.keyPanSpeed, 0 );
 				needsUpdate = true;
 				break;
 
 			case scope.keys.RIGHT:
+				rotateLeft(-2 * Math.PI / 60 / 60 * 5);
+				// pan( - scope.keyPanSpeed, 0 );
+				needsUpdate = true;
+				break;
+
+			case 87:
+				pan( 0, scope.keyPanSpeed );
+				needsUpdate = true;
+				break;
+
+			case 83:
+				pan( 0, - scope.keyPanSpeed );
+				needsUpdate = true;
+				break;
+
+			case 65:
+				pan( scope.keyPanSpeed, 0 );
+				needsUpdate = true;
+				break;
+
+			case 68:
 				pan( - scope.keyPanSpeed, 0 );
 				needsUpdate = true;
 				break;
+
 
 		}
 
