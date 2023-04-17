@@ -46,7 +46,6 @@ function TwoBodyCircle2() {
   var pos2 = [-pos1[0], 0, 0];
 
   var res = ComputeDistance(pos1, pos2);
-  // var v = Math.sqrt(m1 * g_const / res.distance_norm) * Math.sqrt(2) / 2;
   
   var v = Math.sqrt(1/2 * m1 * g_const / res.distance_norm);
 
