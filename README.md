@@ -16,9 +16,7 @@ Through the "Settings" panel it is possible to change the timestep used for nume
 
 ## Usage
 
-To use the simulator online, go to ""
-
-If you want to run the simulator on your local machine, simply clone this repository and open the index.html file with your browser.
+You can use the [simulator](https://htmlpreview.github.io/?https://github.com/SlowWave/n_body_simulator/blob/main/src/index.html) online, otherwhise, if you want to run the simulator on your local machine, simply clone this repository and open the index.html file with your browser.
 
 ## License
 
