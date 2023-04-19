@@ -1,6 +1,6 @@
 # N-Body Simulator
 
-IMAGE
+![Screenshot from 2023-04-19 20-16-42](https://user-images.githubusercontent.com/95315431/233165279-6807c80f-c5bb-49b6-9539-8618a53e69f4.png)
 
 ## Project Description
 
