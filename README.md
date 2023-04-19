@@ -4,21 +4,15 @@ IMAGE
 
 ## Project Description
 
-N-Body Simulator is simple web page that uses JavaScript and Three.js to simulate the motion of pointlike bodies taking into account the gravitanional interaction between them. 
+N-Body Simulator is simple web page that uses JavaScript and Three.js to render a 3D simulation of the motion of pointlike bodies taking into account the gravitanional interaction between them. 
 
-It renders a 3D simulation that allows users to visualize the movements of multiple objects in space, taking into account their gravitational interactions with one another.
+There are several options to initialize a simulation:
 
+- Select a simulation scenario among 2-Body, 3-Body and N-Body scenarios
+- Generate a single body selecting its mass, radius as well as its initial position and velocity
+- Generate a random body
 
-
-
-
-## Installation
-
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
-
-```bash
-pip install foobar
-```
+Through the "Settings" panel it is possible to change the timestep used for numerical integration and the gravitational constant.
 
 ## Usage
 
