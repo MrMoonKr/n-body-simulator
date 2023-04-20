@@ -40,13 +40,13 @@
         <div class="position">
           <span>Body Position</span>
           <span>
-            <input type="range" min="-250" max="250" value="0" step="5" id="_x" onmousemove="updatePos()">
+            <input type="range" min="-250" max="250" value="0" step="5" id="_x" oninput="updatePos()">
           </span>
           <span>
-            <input type="range" min="-250" max="250" value="0" step="5" id="_y" onmousemove="updatePos()">
+            <input type="range" min="-250" max="250" value="0" step="5" id="_y" oninput="updatePos()">
           </span>
           <span>
-            <input type="range" min="-250" max="250" value="0" step="5" id="_z" onmousemove="updatePos()">
+            <input type="range" min="-250" max="250" value="0" step="5" id="_z" oninput="updatePos()">
           </span>
           <span id="output_position">pos: [0, 0, 0] m</span>
         </div>
@@ -54,13 +54,13 @@
         <div class="velocity">
           <span>Body Velocity</span>
           <span>
-            <input type="range" min="-100" max="100" value="0" step="5" id="_vx" onmousemove="updateVel()">
+            <input type="range" min="-100" max="100" value="0" step="5" id="_vx" oninput="updateVel()">
           </span>
           <span>
-            <input type="range" min="-100" max="100" value="0" step="5" id="_vy" onmousemove="updateVel()">
+            <input type="range" min="-100" max="100" value="0" step="5" id="_vy" oninput="updateVel()">
           </span>
           <span>
-            <input type="range" min="-100" max="100" value="0" step="5" id="_vz" onmousemove="updateVel()">
+            <input type="range" min="-100" max="100" value="0" step="5" id="_vz" oninput="updateVel()">
           </span>
           <span id="output_velocity">vel: [0, 0, 0] 1e-6 m/s</span>
         </div>
@@ -68,7 +68,7 @@
         <div class="mass">
           <span>Body Mass</span>
           <span>
-            <input type="range" min="1" max="10000" value="1" step="1" id="_m" onmousemove="updateMass()">
+            <input type="range" min="1" max="10000" value="1" step="1" id="_m" oninput="updateMass()">
           </span>
           <span id="output_mass">mass: 1 kg</span>
         </div>
@@ -76,7 +76,7 @@
         <div class="radius">
           <span>Body Radius</span>
           <span>
-            <input type="range" min="1" max="10" value="1" step="1" id="_r" onmousemove="updateRadius()">
+            <input type="range" min="1" max="10" value="1" step="1" id="_r" oninput="updateRadius()">
           </span>
           <span id="output_radius">radius: 1 m</span>
         </div>
@@ -100,7 +100,7 @@
         <div>
           <span>Simulation Step</span>
           <span>
-            <input type="range" min="0" max="50000" value="5000" step="1000" id="_sim_step" onmousemove="updateSimulationStep()">
+            <input type="range" min="0" max="50000" value="5000" step="1000" id="_sim_step" oninput="updateSimulationStep()">
           </span>
           <span id="output_step">step: 5000 s</span>
         </div>
@@ -108,7 +108,7 @@
         <div>
           <span>Gravitational Constant</span>
           <span>
-            <input type="range" min="0.1" max="10" value="1" step="0.1" id="_grav_const" onmousemove="updateGravityConst()">
+            <input type="range" min="0.1" max="10" value="1" step="0.1" id="_grav_const" oninput="updateGravityConst()">
           </span>
           <span id="output_grav">gravitational constant: 1 G</span>
         </div>
