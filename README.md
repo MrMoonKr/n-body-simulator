@@ -20,4 +20,4 @@ You can play with [N-Body Simulator](https://htmlpreview.github.io/?https://gith
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md) file for details.
