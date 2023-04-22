@@ -4,7 +4,7 @@ https://user-images.githubusercontent.com/95315431/233173239-1c649d92-f61d-4dad-
 
 ## Project Description
 
-N-Body Simulator is simple web page that uses JavaScript and Three.js to render a 3D simulation of the motion of pointlike bodies taking into account the gravitational interaction between them. 
+N-Body Simulator is a simple web page that uses JavaScript and Three.js to render a 3D simulation of the motion of pointlike bodies taking into account the gravitational interaction between them. 
 
 There are several ways to initialize a simulation:
 
