@@ -1,0 +1,15 @@
+{
+  "name": "n-body-simulator",
+  "version": "1.0.0",
+  "description": "https://user-images.githubusercontent.com/95315431/233173239-1c649d92-f61d-4dad-96dd-b038f0a8a4f1.mp4",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "three": "^0.163.0"
+  }
+}

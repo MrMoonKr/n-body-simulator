@@ -12,13 +12,13 @@ const g_const = 6.6743e-11;
 const scenario = new Scenario();
 
 // define animation function
-const animate = function() {
-  if(h > 0) {
-    scenario.SimulationStep(h);
-  }
-  requestAnimationFrame(animate);
-  controls.update();
-  renderer.render(scene, camera);
+const animate = function () {
+    if ( h > 0 ) {
+        scenario.SimulationStep( h );
+    }
+    requestAnimationFrame( animate );
+    controls.update();
+    renderer.render( scene, camera );
 };
 
 // start scenario animation

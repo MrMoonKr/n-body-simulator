@@ -1,208 +1,222 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>N-Body Simulator</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+    <title>N-Body Simulator</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <div class="side-icons">
-    <div class="icon">
-      <i class="material-icons" onclick="openNav('ScenarioSidebar')">bubble_chart</i>
-      <span class="tooltip-text">Scenarios</span>
-      <div id="ScenarioSidebar" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav('ScenarioSidebar')">&times;</a>
-        <span>TWO-BODY SYSTEMS</span>
-        <a href="javascript:void(0)" onclick="TwoBodyCircle1()">1-Circular Orbit</a>
-        <a href="javascript:void(0)" onclick="TwoBodyCircle2()">2-Circular Orbits</a>
-        <a href="javascript:void(0)" onclick="TwoBodyElliptic1()">1-Elliptical Orbit</a>
-        <a href="javascript:void(0)" onclick="TwoBodyElliptic2()">2-Elliptical Orbits</a>
-        <a href="javascript:void(0)" onclick="TwoBodyRand()">Random 2-Body</a>
-        <hr style="width:85%;text-align:left;margin-left:4">
-        <span>THREE-BODY SYSTEMS</span>
-        <a href="javascript:void(0)" onclick="ThreeBodyCircle1s()">1-Circular Orbit - Stable</a>
-        <a href="javascript:void(0)" onclick="ThreeBodyCircle1ua()">1-Circular Orbit - Unstable - A</a>
-        <a href="javascript:void(0)" onclick="ThreeBodyCircle1ub()">1-Circular Orbit - Unstable - B</a>
-        <a href="javascript:void(0)" onclick="ThreeBodyElliptic1()">3-Elliptical Orbits - Unstable</a>
-        <a href="javascript:void(0)" onclick="ThreeBodyFigureEight()">Figure-Eight - Unstable</a>
-        <a href="javascript:void(0)" onclick="ThreeBodyRand()">Random 3-Body</a>
-        <hr style="width:85%;text-align:left;margin-left:4">
-        <span>N-BODY SYSTEMS</span>
-        <a href="javascript:void(0)" onclick="CreateRandomScenario()">Random N-Body</a>
-        <hr style="width:85%;text-align:left;margin-left:4">
-      </div>
+    <div class="side-icons">
+        <div class="icon">
+            <i class="material-icons" onclick="openNav('ScenarioSidebar')">bubble_chart</i>
+            <span class="tooltip-text">Scenarios</span>
+            <div id="ScenarioSidebar" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav('ScenarioSidebar')">&times;</a>
+                <span>TWO-BODY SYSTEMS</span>
+                <a href="javascript:void(0)" onclick="TwoBodyCircle1()">1-Circular Orbit</a>
+                <a href="javascript:void(0)" onclick="TwoBodyCircle2()">2-Circular Orbits</a>
+                <a href="javascript:void(0)" onclick="TwoBodyElliptic1()">1-Elliptical Orbit</a>
+                <a href="javascript:void(0)" onclick="TwoBodyElliptic2()">2-Elliptical Orbits</a>
+                <a href="javascript:void(0)" onclick="TwoBodyRand()">Random 2-Body</a>
+                <hr style="width:85%;text-align:left;margin-left:4">
+                <span>THREE-BODY SYSTEMS</span>
+                <a href="javascript:void(0)" onclick="ThreeBodyCircle1s()">1-Circular Orbit - Stable</a>
+                <a href="javascript:void(0)" onclick="ThreeBodyCircle1ua()">1-Circular Orbit - Unstable - A</a>
+                <a href="javascript:void(0)" onclick="ThreeBodyCircle1ub()">1-Circular Orbit - Unstable - B</a>
+                <a href="javascript:void(0)" onclick="ThreeBodyElliptic1()">3-Elliptical Orbits - Unstable</a>
+                <a href="javascript:void(0)" onclick="ThreeBodyFigureEight()">Figure-Eight - Unstable</a>
+                <a href="javascript:void(0)" onclick="ThreeBodyRand()">Random 3-Body</a>
+                <hr style="width:85%;text-align:left;margin-left:4">
+                <span>N-BODY SYSTEMS</span>
+                <a href="javascript:void(0)" onclick="CreateRandomScenario()">Random N-Body</a>
+                <hr style="width:85%;text-align:left;margin-left:4">
+            </div>
+        </div>
+        <div class="icon">
+            <i class="material-icons" onclick="openNav('BodySidebar')">add_circle</i>
+            <span class="tooltip-text">Add Body</span>
+            <div id="BodySidebar" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav('BodySidebar')">&times;</a>
+                <div class="position">
+                    <span>Body Position</span>
+                    <span>
+                        <input type="range" min="-250" max="250" value="0" step="5" id="_x" oninput="updatePos()">
+                    </span>
+                    <span>
+                        <input type="range" min="-250" max="250" value="0" step="5" id="_y" oninput="updatePos()">
+                    </span>
+                    <span>
+                        <input type="range" min="-250" max="250" value="0" step="5" id="_z" oninput="updatePos()">
+                    </span>
+                    <span id="output_position">pos: [0, 0, 0] m</span>
+                </div>
+                <hr style="width:85%;text-align:left;margin-left:4">
+                <div class="velocity">
+                    <span>Body Velocity</span>
+                    <span>
+                        <input type="range" min="-100" max="100" value="0" step="5" id="_vx" oninput="updateVel()">
+                    </span>
+                    <span>
+                        <input type="range" min="-100" max="100" value="0" step="5" id="_vy" oninput="updateVel()">
+                    </span>
+                    <span>
+                        <input type="range" min="-100" max="100" value="0" step="5" id="_vz" oninput="updateVel()">
+                    </span>
+                    <span id="output_velocity">vel: [0, 0, 0] 1e-6 m/s</span>
+                </div>
+                <hr style="width:85%;text-align:left;margin-left:4">
+                <div class="mass">
+                    <span>Body Mass</span>
+                    <span>
+                        <input type="range" min="1" max="10000" value="1" step="1" id="_m" oninput="updateMass()">
+                    </span>
+                    <span id="output_mass">mass: 1 kg</span>
+                </div>
+                <hr style="width:85%;text-align:left;margin-left:4">
+                <div class="radius">
+                    <span>Body Radius</span>
+                    <span>
+                        <input type="range" min="1" max="10" value="1" step="1" id="_r" oninput="updateRadius()">
+                    </span>
+                    <span id="output_radius">radius: 1 m</span>
+                </div>
+                <hr style="width:85%;text-align:left;margin-left:4">
+                <div>
+                    <span>
+                        <button class="btn" onclick="newBody()">Create Body</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="icon">
+            <i class="material-icons" onclick="scenario.CreateBody(null, null, null, null, null)">help</i>
+            <span class="tooltip-text">Add Random Body</span>
+        </div>
+        <div class="icon">
+            <i class="material-icons" onclick="openNav('SettingSidebar')">settings</i>
+            <span class="tooltip-text">Settings</span>
+            <div id="SettingSidebar" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav('SettingSidebar')">&times;</a>
+                <div>
+                    <span>Simulation Step</span>
+                    <span>
+                        <input type="range" min="0" max="50000" value="5000" step="1000" id="_sim_step"
+                            oninput="updateSimulationStep()">
+                    </span>
+                    <span id="output_step">step: 5000 s</span>
+                </div>
+                <hr style="width:85%;text-align:left;margin-left:4">
+                <div>
+                    <span>Gravitational Constant</span>
+                    <span>
+                        <input type="range" min="0.1" max="10" value="1" step="0.1" id="_grav_const"
+                            oninput="updateGravityConst()">
+                    </span>
+                    <span id="output_grav">gravitational constant: 1 G</span>
+                </div>
+                <hr style="width:85%;text-align:left;margin-left:4">
+            </div>
+        </div>
+        <div class="icon">
+            <i class="material-icons" onclick="scenario.ClearScenario()">delete</i>
+            <span class="tooltip-text">Delete Scenario</span>
+        </div>
     </div>
-    <div class="icon">
-      <i class="material-icons" onclick="openNav('BodySidebar')">add_circle</i>
-      <span class="tooltip-text">Add Body</span>
-      <div id="BodySidebar" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav('BodySidebar')">&times;</a>
-        <div class="position">
-          <span>Body Position</span>
-          <span>
-            <input type="range" min="-250" max="250" value="0" step="5" id="_x" oninput="updatePos()">
-          </span>
-          <span>
-            <input type="range" min="-250" max="250" value="0" step="5" id="_y" oninput="updatePos()">
-          </span>
-          <span>
-            <input type="range" min="-250" max="250" value="0" step="5" id="_z" oninput="updatePos()">
-          </span>
-          <span id="output_position">pos: [0, 0, 0] m</span>
-        </div>
-        <hr style="width:85%;text-align:left;margin-left:4">
-        <div class="velocity">
-          <span>Body Velocity</span>
-          <span>
-            <input type="range" min="-100" max="100" value="0" step="5" id="_vx" oninput="updateVel()">
-          </span>
-          <span>
-            <input type="range" min="-100" max="100" value="0" step="5" id="_vy" oninput="updateVel()">
-          </span>
-          <span>
-            <input type="range" min="-100" max="100" value="0" step="5" id="_vz" oninput="updateVel()">
-          </span>
-          <span id="output_velocity">vel: [0, 0, 0] 1e-6 m/s</span>
-        </div>
-        <hr style="width:85%;text-align:left;margin-left:4">
-        <div class="mass">
-          <span>Body Mass</span>
-          <span>
-            <input type="range" min="1" max="10000" value="1" step="1" id="_m" oninput="updateMass()">
-          </span>
-          <span id="output_mass">mass: 1 kg</span>
-        </div>
-        <hr style="width:85%;text-align:left;margin-left:4">
-        <div class="radius">
-          <span>Body Radius</span>
-          <span>
-            <input type="range" min="1" max="10" value="1" step="1" id="_r" oninput="updateRadius()">
-          </span>
-          <span id="output_radius">radius: 1 m</span>
-        </div>
-        <hr style="width:85%;text-align:left;margin-left:4">
-        <div>
-          <span>
-            <button class="btn" onclick="newBody()">Create Body</button>
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="icon">
-      <i class="material-icons" onclick="scenario.CreateBody(null, null, null, null, null)">help</i>
-      <span class="tooltip-text">Add Random Body</span>
-    </div>
-    <div class="icon">
-      <i class="material-icons" onclick="openNav('SettingSidebar')">settings</i>
-      <span class="tooltip-text">Settings</span>
-      <div id="SettingSidebar" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav('SettingSidebar')">&times;</a>
-        <div>
-          <span>Simulation Step</span>
-          <span>
-            <input type="range" min="0" max="50000" value="5000" step="1000" id="_sim_step" oninput="updateSimulationStep()">
-          </span>
-          <span id="output_step">step: 5000 s</span>
-        </div>
-        <hr style="width:85%;text-align:left;margin-left:4">
-        <div>
-          <span>Gravitational Constant</span>
-          <span>
-            <input type="range" min="0.1" max="10" value="1" step="0.1" id="_grav_const" oninput="updateGravityConst()">
-          </span>
-          <span id="output_grav">gravitational constant: 1 G</span>
-        </div>
-        <hr style="width:85%;text-align:left;margin-left:4">
-      </div>
-    </div>
-    <div class="icon">
-      <i class="material-icons" onclick="scenario.ClearScenario()">delete</i>
-      <span class="tooltip-text">Delete Scenario</span>
-    </div>
-  </div>
-  <script>
-    function openNav(id) {
-      document.getElementById(id).style.width = "300px";
-    }
+    <script>
+        function openNav( id )
+        {
+            document.getElementById( id ).style.width = "300px";
+        }
 
-    function closeNav(id) {
-      document.getElementById(id).style.width = "0";
-    }
+        function closeNav( id )
+        {
+            document.getElementById( id ).style.width = "0";
+        }
 
-    function newBody() {
-      var _pos = [];
-      var _vel = [];
+        function newBody()
+        {
+            var _pos = [];
+            var _vel = [];
 
-      _pos.push(parseFloat(document.getElementById('_x').value));
-      _pos.push(parseFloat(document.getElementById('_y').value));
-      _pos.push(parseFloat(document.getElementById('_z').value));
-      _vel.push(parseFloat(document.getElementById('_vx').value * 1e-6));
-      _vel.push(parseFloat(document.getElementById('_vy').value * 1e-6));
-      _vel.push(parseFloat(document.getElementById('_vz').value * 1e-6));
+            _pos.push( parseFloat( document.getElementById( '_x' ).value ) );
+            _pos.push( parseFloat( document.getElementById( '_y' ).value ) );
+            _pos.push( parseFloat( document.getElementById( '_z' ).value ) );
+            _vel.push( parseFloat( document.getElementById( '_vx' ).value * 1e-6 ) );
+            _vel.push( parseFloat( document.getElementById( '_vy' ).value * 1e-6 ) );
+            _vel.push( parseFloat( document.getElementById( '_vz' ).value * 1e-6 ) );
 
-      var _mass = parseFloat(document.getElementById('_m').value);
-      var _radius = parseFloat(document.getElementById('_r').value);
+            var _mass = parseFloat( document.getElementById( '_m' ).value );
+            var _radius = parseFloat( document.getElementById( '_r' ).value );
 
-      scenario.CreateBody(_pos, _vel, _radius, _mass, null);
-    }
+            scenario.CreateBody( _pos, _vel, _radius, _mass, null );
+        }
 
-    function updatePos() {
+        function updatePos()
+        {
 
-      var _pos_x_str = document.getElementById('_x').value;
-      var _pos_y_str = document.getElementById('_y').value;
-      var _pos_z_str = document.getElementById('_z').value;
+            var _pos_x_str = document.getElementById( '_x' ).value;
+            var _pos_y_str = document.getElementById( '_y' ).value;
+            var _pos_z_str = document.getElementById( '_z' ).value;
 
-      document.getElementById("output_position").innerHTML = "pos: [" + _pos_x_str + ", " + _pos_y_str + ", " + _pos_z_str + "] m";
-    }
+            document.getElementById( "output_position" ).innerHTML = "pos: [" + _pos_x_str + ", " + _pos_y_str + ", " + _pos_z_str + "] m";
+        }
 
-    function updateVel() {
+        function updateVel()
+        {
 
-      var _vel_x_str = document.getElementById('_vx').value;
-      var _vel_y_str = document.getElementById('_vy').value;
-      var _vel_z_str = document.getElementById('_vz').value;
+            var _vel_x_str = document.getElementById( '_vx' ).value;
+            var _vel_y_str = document.getElementById( '_vy' ).value;
+            var _vel_z_str = document.getElementById( '_vz' ).value;
 
-      document.getElementById("output_velocity").innerHTML = "vel: [" + _vel_x_str + ", " + _vel_y_str + ", " + _vel_z_str + "] 1e-6 m/s";
-    }
+            document.getElementById( "output_velocity" ).innerHTML = "vel: [" + _vel_x_str + ", " + _vel_y_str + ", " + _vel_z_str + "] 1e-6 m/s";
+        }
 
-    function updateMass() {
+        function updateMass()
+        {
 
-      var _mass_str = document.getElementById('_m').value;
+            var _mass_str = document.getElementById( '_m' ).value;
 
-      document.getElementById("output_mass").innerHTML = "mass: " + _mass_str + " kg";
-    }
+            document.getElementById( "output_mass" ).innerHTML = "mass: " + _mass_str + " kg";
+        }
 
 
-    function updateRadius() {
+        function updateRadius()
+        {
 
-      var _radius_str = document.getElementById('_r').value;
+            var _radius_str = document.getElementById( '_r' ).value;
 
-      document.getElementById("output_radius").innerHTML = "radius: " + _radius_str + " m";
-    }
+            document.getElementById( "output_radius" ).innerHTML = "radius: " + _radius_str + " m";
+        }
 
-    function updateSimulationStep() {
+        function updateSimulationStep()
+        {
 
-      var _sim_step = document.getElementById('_sim_step').value;
-      document.getElementById("output_step").innerHTML = "step: " + _sim_step + " s";
+            var _sim_step = document.getElementById( '_sim_step' ).value;
+            document.getElementById( "output_step" ).innerHTML = "step: " + _sim_step + " s";
 
-      SetSimulationStep(_sim_step);
-    }
+            SetSimulationStep( _sim_step );
+        }
 
-    function updateGravityConst() {
+        function updateGravityConst()
+        {
 
-      var _const = document.getElementById('_grav_const').value;
-      document.getElementById("output_grav").innerHTML = "gravitational constant: " + _const + " G";
+            var _const = document.getElementById( '_grav_const' ).value;
+            document.getElementById( "output_grav" ).innerHTML = "gravitational constant: " + _const + " G";
 
-      SetGravityConst(_const);
-    }
+            SetGravityConst( _const );
+        }
 
-
-  </script>
-  <script src="js/three.js"></script>
-  <script src="js/OrbitControls.js"></script>
-  <script type="text/javascript" src="maths_utils.js"></script>
-  <script type="text/javascript" src="animations.js"></script>
-  <script type="text/javascript" src="physics.js"></script>
-  <script type="text/javascript" src="commands.js"></script>
-  <script type="text/javascript" src="app.js"></script>
+    </script>
+    
+    <script src="js/three.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script type="text/javascript" src="maths_utils.js"></script>
+    <script type="text/javascript" src="animations.js"></script>
+    <script type="text/javascript" src="physics.js"></script>
+    <script type="text/javascript" src="commands.js"></script>
+    <script type="text/javascript" src="app.js"></script>
 </body>
+
 </html>
